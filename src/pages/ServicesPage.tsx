@@ -104,7 +104,7 @@ export default function ServicesPage() {
   const divider = isDark ? 'border-white/8' : 'border-dark-bg/8';
 
   return (
-    <div className={`min-h-screen pt-64 pb-24 ${isDark ? 'bg-dark-bg' : 'bg-light-bg'}`}>
+    <div className={`min-h-screen pt-32 pb-24 ${isDark ? 'bg-dark-bg' : 'bg-light-bg'}`}>
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
 
         {/* ── Header ── */}
@@ -112,9 +112,9 @@ export default function ServicesPage() {
           <div className={`text-xs font-semibold tracking-widest uppercase mb-4 ${textFaint}`}>
             NextStep Learning — Services
           </div>
-          <h1 className={`text-[clamp(2.5rem,7vw,6rem)] font-display font-black leading-none mb-4 ${textPrimary}`}>
+          <h1 className={`text-[clamp(2.3rem,5vw,4.8rem)] font-display font-black leading-none mb-4 ${textPrimary}`}>
             Premium Digital<br />
-            <span className="gradient-text">Solutions.</span>
+            <span className="gradient-text">Solutions</span>
           </h1>
           <p className={`max-w-lg text-base lg:text-lg leading-relaxed ${textMuted}`}>
             For businesses that want to make a real impact online — built by people who understand design and strategy.
@@ -171,7 +171,7 @@ export default function ServicesPage() {
 
                   <NavLink
                     to="/contact"
-                    className={`self-start inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-bold text-white transition-all hover:opacity-90 hover:scale-105 bg-gradient-to-r ${service.gradient}`}
+                    className="self-start inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-bold text-white bg-gradient-to-r from-brand-pink to-brand-orange hover:opacity-90 transition-all hover:scale-105"
                   >
                     Get a Quote <ArrowRight size={14} />
                   </NavLink>

@@ -1,6 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 
 @layer base {
   :root {
@@ -22,8 +25,8 @@
   }
 
   body.light {
-    background-color: #F8FAFC;
-    color: #0D1426;
+    background-color: #F3F5F9;
+  color: #0D1426;
   }
 
   * {
@@ -61,7 +64,7 @@
 
   /* ── Glass ── */
   .glass {
-    background: rgba(13, 20, 38, 0.65);
+    background: rgba(13, 20, 38, 0.55);
     backdrop-filter: blur(24px) saturate(180%);
     -webkit-backdrop-filter: blur(24px) saturate(180%);
   }
@@ -93,14 +96,14 @@
 
   /* ── Typography ── */
   .text-display {
-    font-family: 'Syne', sans-serif;
+    font-family: 'Outfit', sans-serif;
     font-weight: 800;
     letter-spacing: -0.03em;
     line-height: 1.0;
   }
 
   .text-hero {
-    font-family: 'Syne', sans-serif;
+    font-family: 'Outfit', sans-serif;
     font-weight: 900;
     letter-spacing: -0.04em;
     line-height: 0.95;
@@ -114,7 +117,7 @@
   .reveal {
     opacity: 0;
     transform: translateY(24px);
-    transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    transition: opacity 1.5s cubic-bezier(0.22, 1, 0.36, 1), transform 1.5s cubic-bezier(0.22, 1, 0.36, 1);
   }
 
   .reveal.visible {
@@ -125,7 +128,7 @@
   .reveal-left {
     opacity: 0;
     transform: translateX(-24px);
-    transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    transition: opacity 1.5s cubic-bezier(0.22, 1, 0.36, 1), transform 1.5s cubic-bezier(0.22, 1, 0.36, 1);
   }
 
   .reveal-left.visible {
@@ -136,7 +139,7 @@
   .reveal-right {
     opacity: 0;
     transform: translateX(24px);
-    transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    transition: opacity 1.5s cubic-bezier(0.22, 1, 0.36, 1), transform 1.5s cubic-bezier(0.22, 1, 0.36, 1);
   }
 
   .reveal-right.visible {
@@ -202,4 +205,7 @@
 @keyframes count-up {
   from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }
+}
+.primary-action-btn{
+  @apply bg-gradient-to-r from-brand-pink to-brand-orange text-white hover:opacity-90 transition-all duration-300 hover:scale-105;
 }

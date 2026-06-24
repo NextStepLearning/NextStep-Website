@@ -7,6 +7,7 @@ const navColumns = [
     title: 'Platform',
     links: [
       { label: 'Home', to: '/' },
+      { label: 'Events', to: '/events' },
       { label: 'Courses', to: '/courses' },
       { label: 'Internships', to: '/internships' },
       { label: 'Services', to: '/services' },
@@ -18,10 +19,13 @@ const navColumns = [
     title: 'For Students',
     links: [
       { label: 'Python Programming', to: '/courses' },
-      { label: 'AI & ML', to: '/courses' },
+      { label: 'Java Programming', to: '/courses' },
       { label: 'UI/UX Design', to: '/courses' },
-      { label: 'Full Stack Dev', to: '/courses' },
+      { label: 'Web Development', to: '/courses' },
+      { label: 'Full Stack Development', to: '/courses' },
       { label: 'Data Science', to: '/courses' },
+      { label: 'Data Analytics', to: '/courses' },
+      { label: 'AI & ML', to: '/courses' },
     ],
   },
   {
@@ -31,6 +35,7 @@ const navColumns = [
       { label: 'UI/UX Design', to: '/services' },
       { label: 'Landing Pages', to: '/services' },
       { label: 'Portfolio Websites', to: '/services' },
+      { label: 'Events', to: '/events' },
     ],
   },
 ];
@@ -38,7 +43,7 @@ const navColumns = [
 const socials = [
   { icon: Instagram, href: 'https://www.instagram.com/nextstep__learning', label: 'Instagram' },
   { icon: Linkedin, href: 'https://www.linkedin.com/company/nextstep-learning-official/', label: 'LinkedIn' },
-  { icon: Mail, href: 'mailto:queries.nextsteplearning@gmail.com', label: 'Email' },
+  { icon: Mail, href: 'https://mail.google.com/mail/?view=cm&fs=1&to=queries.nextsteplearning@gmail.com', label: 'Email' },
   { icon: MessageCircle, href: 'https://chat.whatsapp.com/KrxqMd7V0T3GPQKjyzxlc0', label: 'WhatsApp' },
 ];
 
@@ -63,7 +68,7 @@ export default function Footer() {
             <img
               src="/Side_transperent.png"
               alt="NextStep Learning"
-              className="h-48 w-auto object-contain mb-5"
+              className="h-14 w-auto object-contain opacity-95"
             />
             <p className={`text-sm leading-relaxed max-w-xs mb-6 ${textMuted}`}>
               Empowering Students. Elevating Businesses.<br />

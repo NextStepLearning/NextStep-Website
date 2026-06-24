@@ -1,70 +1,134 @@
-import { X, CheckCircle, Loader2 } from 'lucide-react';
 import { useState } from 'react';
 import { useTheme } from '../context/ThemeContext';
-import { supabase } from '../lib/supabase';
-
-type ModalType = 'course' | 'internship';
-
+import { X, CheckCircle, ChevronDown } from 'lucide-react';type ModalType = 'course' | 'internship' | 'event';
+import { useNavigate } from 'react-router-dom';
 interface RegistrationModalProps {
-  type: ModalType;
-  itemName: string;
-  onClose: () => void;
+
+type: ModalType;
+
+itemName: string;
+
+price?: number;
+
+onClose: () => void;
+
 }
-
-const courseFields = [
+interface Field {
+  id: string;
+  label: string;
+  type: string;
+  placeholder?: string;
+  options?: string[];
+}
+const courseFields: Field[] = [
   { id: 'full_name', label: 'Full Name', type: 'text', placeholder: 'Your full name' },
   { id: 'email', label: 'Email Address', type: 'email', placeholder: 'you@example.com' },
   { id: 'phone', label: 'Phone Number', type: 'tel', placeholder: '+91 XXXXX XXXXX' },
   { id: 'college_name', label: 'College Name', type: 'text', placeholder: 'Your college' },
   { id: 'department', label: 'Department', type: 'text', placeholder: 'e.g. Computer Science' },
-  { id: 'year', label: 'Year of Study', type: 'text', placeholder: 'e.g. 2nd Year' },
-];
+  { id: 'year', label: 'Year of Study', type: 'select', options: ['1st Year','2nd Year','3rd Year','4th Year','5th Year']}]
 
-const internshipFields = [
+const internshipFields: Field[] = [
   { id: 'full_name', label: 'Full Name', type: 'text', placeholder: 'Your full name' },
   { id: 'email', label: 'Email Address', type: 'email', placeholder: 'you@example.com' },
   { id: 'phone', label: 'Phone Number', type: 'tel', placeholder: '+91 XXXXX XXXXX' },
   { id: 'college_name', label: 'College Name', type: 'text', placeholder: 'Your college' },
   { id: 'department', label: 'Department', type: 'text', placeholder: 'e.g. Computer Science' },
-  { id: 'year', label: 'Year of Study', type: 'text', placeholder: 'e.g. 2nd Year' },
-  { id: 'domain', label: 'Preferred Domain', type: 'text', placeholder: 'e.g. Web Development' },
+{id: 'year', label: 'Year of Study', type: 'select', options: ['1st Year','2nd Year','3rd Year','4th Year','5th Year'],},
+  {
+  id: 'domain',
+  label: 'Preferred Domain',
+  type: 'select',
+  options: [
+    'Python Programming',
+    'Java Programming',
+    'Data Science',
+    'Data Analytics',
+    'AI & ML',
+    'UI/UX Design',
+    'Web Development',
+    'Full Stack Development',
+  ],
+},
 ];
-
 export default function RegistrationModal({ type, itemName, onClose }: RegistrationModalProps) {
   const { theme } = useTheme();
   const isDark = theme === 'dark';
-  const fields = type === 'course' ? courseFields : internshipFields;
-
+  const fields =
+  type === 'course'
+    ? courseFields
+    : type === 'internship'
+    ? internshipFields
+    : courseFields;
   const [formData, setFormData] = useState<Record<string, string>>({});
-  const [loading, setLoading] = useState(false);
-  const [success, setSuccess] = useState(false);
-  const [error, setError] = useState('');
+  const [success] = useState(false);
+  const [error] = useState('');
+  const navigate = useNavigate();
+  const getInternshipPrice = () => {
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
-    setError('');
+if (type !== 'internship')
 
-    try {
-      const table = type === 'course' ? 'course_registrations' : 'internship_registrations';
-      const payload = {
-        ...formData,
-        [type === 'course' ? 'course_name' : 'internship_name']: itemName,
-        registration_date: new Date().toISOString(),
-      };
+return 1499;
 
-      const { error: dbError } = await supabase.from(table).insert(payload);
-      if (dbError) throw dbError;
+const isTraining = itemName.includes('Training');
 
-      setSuccess(true);
-    } catch (err: unknown) {
-      setError('Something went wrong. Please try again.');
-      console.error(err);
-    } finally {
-      setLoading(false);
-    }
-  };
+const isProject = itemName.includes('Project');
 
+const is15Days = itemName.includes('15 Days');
+
+const is1Month = itemName.includes('1 Month');
+
+const is2Months = itemName.includes('2 Months');
+
+if (isTraining) {
+
+if (is15Days)
+
+return participantType === 'Team of 5'
+
+? 1199
+
+: 299;
+
+if (is1Month)
+
+return participantType === 'Team of 5'
+
+? 1999
+
+: 499;
+
+if (is2Months)
+
+return participantType === 'Team of 5'
+
+? 2499
+
+: 599;
+
+}
+
+if (isProject) {
+
+if (is15Days)
+
+return 199;
+
+if (is1Month)
+
+return 299;
+
+if (is2Months)
+
+return 399;
+
+}
+
+return 0;
+
+};
+  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+  const [participantType, setParticipantType] = useState('');
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4" onClick={onClose}>
       {/* Backdrop */}
@@ -108,7 +172,17 @@ export default function RegistrationModal({ type, itemName, onClose }: Registrat
           <>
             <div className="mb-6">
               <div className="inline-flex px-3 py-1 rounded-full text-xs font-semibold bg-brand-purple/10 text-brand-purple mb-3">
-                {type === 'course' ? 'Course Registration' : 'Internship Registration'}
+                {
+type === 'course'
+
+? 'Course Registration'
+
+: type === 'internship'
+
+? 'Internship Registration'
+
+: 'Event Registration'
+}
               </div>
               <h3 className={`text-xl font-display font-bold ${isDark ? 'text-white' : 'text-dark-bg'}`}>{itemName}</h3>
             </div>
@@ -119,41 +193,282 @@ export default function RegistrationModal({ type, itemName, onClose }: Registrat
               </div>
             )}
 
-            <form onSubmit={handleSubmit} className="space-y-4">
+            <form onSubmit={e => e.preventDefault()} className="space-y-4">
               {fields.map(field => (
                 <div key={field.id}>
-                  <label className={`block text-xs font-semibold mb-1.5 ${isDark ? 'text-white/60' : 'text-dark-bg/60'}`}>
-                    {field.label} <span className="text-brand-pink">*</span>
-                  </label>
-                  <input
-                    type={field.type}
-                    required
-                    placeholder={field.placeholder}
-                    value={formData[field.id] || ''}
-                    onChange={e => setFormData(d => ({ ...d, [field.id]: e.target.value }))}
-                    className={`w-full px-4 py-2.5 rounded-xl border text-sm outline-none transition-all duration-300 focus:border-brand-purple focus:ring-2 focus:ring-brand-purple/20 ${
-                      isDark
-                        ? 'bg-dark-bg border-dark-border text-white placeholder-white/30'
-                        : 'bg-light-muted border-light-border text-dark-bg placeholder-dark-bg/30'
-                    }`}
-                  />
-                </div>
-              ))}
 
+                  <label
+                    className={`block text-xs font-semibold mb-1.5 ${
+                      isDark ? 'text-white/60' : 'text-dark-bg/60'
+                    }`}
+                  >
+
+                    {field.label}
+
+                    <span className="text-brand-pink">*</span>
+
+                  </label>
+
+                  {field.type === 'select' ? (
+
+<div className="relative">
+
+  <button
+
+    type="button"
+
+onClick={() =>
+
+setOpenDropdown(
+
+openDropdown === field.id
+
+? null
+
+: field.id
+
+)
+
+}
+    className={`w-full px-4 py-2.5 rounded-xl border text-sm flex items-center justify-between transition-all duration-300 focus:border-brand-purple focus:ring-2 focus:ring-brand-purple/20 ${
+      isDark
+        ? 'bg-dark-bg border-dark-border text-white'
+        : 'bg-light-muted border-light-border text-dark-bg'
+    }`}
+
+  >
+
+    <span>
+
+{formData[field.id]
+
+|| `Select ${field.label}`}
+    </span>
+
+    <ChevronDown
+      size={18}
+      className={`transition-transform ${
+openDropdown === field.id
+
+? 'rotate-180'
+
+: ''      }`}
+    />
+
+  </button>
+
+
+{openDropdown === field.id && (
+    <div
+
+      className={`absolute z-20 mt-2 w-full rounded-xl border overflow-hidden shadow-2xl ${
+        isDark
+          ? 'bg-dark-card border-dark-border'
+          : 'bg-white border-light-border'
+      }`}
+
+    >
+
+      {field.options?.map(option => (
+
+        <button
+
+          key={option}
+
+          type="button"
+
+          onClick={() => {
+
+            setFormData(d => ({
+              ...d,
+              [field.id]: option,
+            }));
+
+            setOpenDropdown(null);
+
+          }}
+
+          className={`w-full px-4 py-3 text-left text-sm transition-colors ${
+            isDark
+              ? 'hover:bg-brand-purple/20 text-white'
+              : 'hover:bg-brand-purple/10 text-dark-bg'
+          }`}
+
+        >
+
+          {option}
+
+        </button>
+
+      ))}
+
+    </div>
+
+  )}
+
+</div>
+
+) : (
+                    <input
+type={field.type}
+required
+
+{...(field.id === 'phone'
+  ? {
+      maxLength: 10,
+      pattern: '[0-9]{10}',
+      inputMode: 'numeric',
+    }
+  : {})}
+
+placeholder={field.placeholder}
+
+value={formData[field.id] || ''}
+
+onChange={e =>
+  setFormData(d => ({
+    ...d,
+    [field.id]:
+field.id === 'phone'
+? e.target.value.replace(/\D/g, '')
+: e.target.value,
+  }))
+}
+
+className={`w-full px-4 py-2.5 rounded-xl border text-sm outline-none transition-all duration-300 focus:border-brand-purple focus:ring-2 focus:ring-brand-purple/20 ${
+  isDark
+    ? 'bg-dark-bg border-dark-border text-white placeholder-white/30'
+    : 'bg-light-muted border-light-border text-dark-bg placeholder-dark-bg/30'
+}`}
+/>
+
+                  )}
+
+                </div>
+
+              ))}
+              {type === 'internship' && (
+
+<div>
+
+<label
+
+className={`block text-xs font-semibold mb-1.5 ${
+isDark
+
+? 'text-white/60'
+
+: 'text-dark-bg/60'
+}`}
+
+>
+
+Participation Type
+
+<span className="text-brand-pink">*</span>
+
+</label>
+
+<select
+
+required
+
+value={participantType}
+
+onChange={(e)=>
+
+setParticipantType(
+
+e.target.value
+
+)
+
+}
+
+className={`w-full px-4 py-2.5 rounded-xl border text-sm ${
+isDark
+
+? 'bg-dark-bg border-dark-border text-white'
+
+: 'bg-light-muted border-light-border text-dark-bg'
+
+}`}
+
+>
+
+<option value="">
+
+Select
+
+</option>
+
+<option value="Individual">
+
+Individual
+
+</option>
+
+{itemName.includes('Training') && (
+
+<option value="Team of 5">
+
+Team of 5
+
+</option>
+
+)}
+
+</select>
+
+</div>
+
+)}
               <button
-                type="submit"
-                disabled={loading}
-                className="w-full py-3 mt-2 rounded-xl text-sm font-semibold text-white bg-gradient-to-r from-brand-purple to-brand-pink hover:opacity-90 transition-all duration-300 disabled:opacity-50 flex items-center justify-center gap-2"
-              >
-                {loading ? (
-                  <>
-                    <Loader2 size={16} className="animate-spin" />
-                    Registering...
-                  </>
-                ) : (
-                  'Register Now'
-                )}
-              </button>
+
+type="button"
+onClick={() =>{
+  onClose();
+
+navigate('/payment', {
+
+state: {
+
+type,
+
+itemName,
+
+formData,
+
+participantType,
+
+price:getInternshipPrice()
+
+}
+
+});
+if (
+type === 'internship' &&
+!participantType
+) {
+
+alert(
+'Please select Individual or Team of 5'
+);
+
+return;
+
+}
+
+}}
+
+className="w-full py-3 mt-2 rounded-xl text-sm font-semibold text-white bg-gradient-to-r from-brand-purple to-brand-pink"
+
+>
+
+Proceed to Payment
+
+</button>
+
             </form>
           </>
         )}

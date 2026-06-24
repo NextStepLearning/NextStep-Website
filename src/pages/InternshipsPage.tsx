@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { CheckCircle2, Calendar, ArrowRight, Clock, ArrowUpRight } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
 import RegistrationModal from '../components/RegistrationModal';
-
+import { NavLink } from 'react-router-dom';
 interface DurationOption {
   duration: string;
   label: string;
@@ -26,30 +26,57 @@ const categories: Category[] = [
     title: 'Training Based Internship',
     subtitle: 'Structured learning with real-world application.',
     description: 'A mentor-guided program where you follow a structured curriculum, attend sessions and work on assignments that mirror actual industry tasks. Ideal for students who want guided, progressive learning.',
-    gradient: 'from-brand-purple to-brand-pink',
+    gradient: 'from-brand-pink to-brand-orange',
     overlayGradient: 'from-brand-purple/20 to-brand-pink/10',
     image: 'https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=900',
     durations: [
       {
         duration: '15 Days',
         label: '15 Days',
-        highlights: ['Intensive sprint format', 'Daily sessions', 'Certificate of completion', 'Industry exposure'],
-      },
+highlights: [
+
+'Training on weekdays',
+
+'Mentor-guided sessions',
+
+'Hands-on tasks',
+
+'Certificate of completion'
+
+],      },
       {
         duration: '1 Month',
         label: '1 Month',
-        highlights: ['Weekly review cycles', 'Full project build', 'Mentor feedback', 'Portfolio addition'],
-      },
+highlights: [
+
+'Training on weekends',
+
+'Hands-on activities',
+
+'Mini project',
+
+'Certificate of completion'
+
+],      },
       {
         duration: '2 Months',
         label: '2 Months',
-        highlights: ['Deep curriculum coverage', 'Multi-project experience', 'Performance review', 'LinkedIn recommendation'],
-      },
+highlights: [
+
+'Training on weekdays',
+
+'Advanced hands-on tasks',
+
+'Capstone project',
+
+'Certificate of completion'
+
+],     },
     ],
   },
   {
-    type: 'Development Based',
-    title: 'Development Based Internship',
+    type: 'Project Based',
+    title: 'Project Based Internship',
     subtitle: 'Ownership-driven experience on live builds.',
     description: 'A hands-on program where you work directly on real client or internal projects. Less structured, more independent — you own a feature, a product, or a deliverable from start to finish.',
     gradient: 'from-brand-pink to-brand-orange',
@@ -57,15 +84,51 @@ const categories: Category[] = [
     image: 'https://images.pexels.com/photos/3184360/pexels-photo-3184360.jpeg?auto=compress&cs=tinysrgb&w=900',
     durations: [
       {
+duration: '15 Days',
+
+label: '15 Days',
+
+highlights: [
+
+'Mini live project',
+
+'Mentor guidance',
+
+'Hands-on implementation',
+
+'Certificate of completion'
+
+],
+
+},
+      {
         duration: '1 Month',
         label: '1 Month',
-        highlights: ['Live project ownership', 'Daily standups', 'Code/design reviews', 'Portfolio-ready output'],
-      },
+highlights: [
+
+'Live project ownership',
+
+'Regular project reviews',
+
+'Portfolio-ready output',
+
+'Certificate of completion'
+
+],      },
       {
         duration: '2 Months',
         label: '2 Months',
-        highlights: ['End-to-end ownership', 'Cross-functional exposure', 'Strong referral letter', 'Industry-level output'],
-      },
+highlights: [
+
+'End-to-end project execution',
+
+'Regular project reviews',
+
+'Industry-level output',
+
+'Certificate of Completion'
+
+],      },
     ],
   },
 ];
@@ -100,10 +163,8 @@ export default function InternshipsPage() {
   const textMuted = isDark ? 'text-white/50' : 'text-dark-bg/50';
   const textFaint = isDark ? 'text-white/25' : 'text-dark-bg/25';
   const divider = isDark ? 'border-white/8' : 'border-dark-bg/8';
-  const cardBg = isDark ? 'bg-dark-card border-dark-border' : 'bg-white border-light-border shadow-sm';
-
   return (
-    <div className={`min-h-screen pt-64 pb-24 ${isDark ? 'bg-dark-bg' : 'bg-light-bg'}`}>
+    <div className={`min-h-screen pt-32 pb-24 ${isDark ? 'bg-dark-bg' : 'bg-light-bg'}`}>
       {modal && (
         <RegistrationModal type="internship" itemName={modal} onClose={() => setModal(null)} />
       )}
@@ -115,9 +176,11 @@ export default function InternshipsPage() {
           <div className={`text-xs font-semibold tracking-widest uppercase mb-4 ${textFaint}`}>
             NextStep Learning — Internships
           </div>
-          <h1 className={`text-[clamp(2.5rem,7vw,6rem)] font-display font-black leading-none mb-4 ${textPrimary}`}>
+          <h1 className={`text-[clamp(2.3rem,5vw,4.8rem)] font-display font-black leading-none mb-4 ${textPrimary}`}>
             Real Experience.<br />
-            <span className="gradient-text-purple-pink">Real Growth.</span>
+            <span className="gradient-text">
+              Real Growth
+            </span>
           </h1>
           <p className={`max-w-lg text-base lg:text-lg leading-relaxed ${textMuted}`}>
             Two internship tracks designed around how you learn best — choose the format that fits your goals.
@@ -201,7 +264,102 @@ export default function InternshipsPage() {
                           </li>
                         ))}
                       </ul>
+                      {/* Pricing */}
 
+<div
+className={`mb-6 rounded-2xl border overflow-hidden ${
+isDark
+
+? 'border-dark-border bg-white/5'
+
+: 'border-light-border bg-light-muted'
+}`}
+
+>
+
+{cat.type === 'Training Based' ? (
+
+<>
+
+<div className="flex items-center justify-between px-4 py-3 border-b border-white/10">
+
+<span className={`text-xs font-semibold ${textMuted}`}>
+
+Individual
+
+</span>
+
+<span className="font-bold text-brand-purple">
+
+{dur.label === '15 Days'
+
+? '₹299'
+
+: dur.label === '1 Month'
+
+? '₹499'
+
+: '₹599'}
+
+</span>
+
+</div>
+
+<div className="flex items-center justify-between px-4 py-3">
+
+<span className={`text-xs font-semibold ${textMuted}`}>
+
+Team of 5
+
+</span>
+
+<span className="font-bold text-brand-purple">
+
+{dur.label === '15 Days'
+
+? '₹1199'
+
+: dur.label === '1 Month'
+
+? '₹1999'
+
+: '₹2499'}
+
+</span>
+
+</div>
+
+</>
+
+) : (
+
+<div className="flex items-center justify-between px-4 py-3">
+
+<span className={`text-xs font-semibold ${textMuted}`}>
+
+Individual
+
+</span>
+
+<span className="font-bold text-brand-purple">
+
+{dur.label === '15 Days'
+
+? '₹199'
+
+: dur.label === '1 Month'
+
+? '₹299'
+
+: '₹399'}
+
+</span>
+
+</div>
+
+)}
+
+</div>
                       <button
                         onClick={() => setModal(`${cat.title} — ${dur.label}`)}
                         className={`inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold text-white transition-all hover:opacity-90 hover:scale-105 bg-gradient-to-r ${cat.gradient}`}
@@ -228,12 +386,19 @@ export default function InternshipsPage() {
               All programs have rolling enrollment. Register today and we'll onboard you at the next available cohort.
             </p>
           </div>
-          <a
-            href="mailto:queries.nextsteplearning@gmail.com"
-            className="flex-shrink-0 inline-flex items-center gap-2 text-sm font-semibold text-brand-purple hover:text-brand-pink transition-colors"
-          >
-            Contact us for details <ArrowRight size={14} />
-          </a>
+          <NavLink
+
+to="/contact"
+
+className="flex-shrink-0 inline-flex items-center gap-2 text-sm font-semibold text-brand-purple hover:text-brand-pink transition-colors"
+
+>
+
+Contact us for details
+
+<ArrowRight size={14} />
+
+</NavLink>
         </div>
 
       </div>

@@ -4,7 +4,6 @@ import {
   ArrowRight,
   ArrowUpRight,
   MessageCircle,
-  Sparkles,
   MoveRight,
   BookOpen,
   Globe,
@@ -25,7 +24,7 @@ function useReveal() {
           }
         });
       },
-      { threshold: 0.12 }
+      { threshold: 0.45 }
     );
     els.forEach(el => io.observe(el));
     return () => io.disconnect();
@@ -33,16 +32,12 @@ function useReveal() {
 }
 
 const stats = [
-  { value: '500+', label: 'Students' },
+  { value: '1000+', label: 'Students' },
   { value: '8+', label: 'Domains' },
   { value: '100%', label: 'Practical Learning' },
   { value: '3', label: 'Internship Programs' },
 ];
 
-const courseTicker = [
-  'Python', 'Java', 'Data Science', 'Data Analytics',
-  'AI & ML', 'UI/UX Design', 'Web Development', 'Full Stack Development',
-];
 
 export default function HomePage() {
   const { theme } = useTheme();
@@ -55,12 +50,48 @@ export default function HomePage() {
   const divider = isDark ? 'border-white/8' : 'border-dark-bg/8';
 
   return (
-    <div className={isDark ? 'bg-dark-bg' : 'bg-light-bg'}>
+<div
+className={`relative overflow-hidden ${
+isDark
 
+? 'bg-dark-bg'
+
+: 'bg-gradient-to-b from-[#F8FAFC] via-[#F3F5F9] to-[#EEF2FF]'
+}`}
+
+>    <div
+className={`absolute top-10 left-0 w-[450px] h-[450px] rounded-full blur-[160px] pointer-events-none ${
+isDark
+
+? 'bg-brand-purple/12'
+
+: 'bg-brand-purple/20'
+}`}
+/>
+
+<div
+className={`absolute top-0 right-0 w-[500px] h-[500px] rounded-full blur-[180px] pointer-events-none ${
+isDark
+
+? 'bg-brand-pink/12'
+
+: 'bg-brand-pink/18'
+}`}
+/>
+
+<div
+className={`absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] rounded-full blur-[220px] pointer-events-none ${
+isDark
+
+? 'bg-brand-orange/8'
+
+: 'bg-brand-orange/14'
+}`}
+/>
       {/* ══════════════════════════════════════════
           HERO
       ══════════════════════════════════════════ */}
-      <section className="relative min-h-screen flex flex-col justify-center items-center text-center overflow-hidden pt-64 pb-16">
+      <section className="relative min-h-[72vh] flex flex-col justify-center items-center text-center overflow-hidden pt-24 pb-8">
 
         {/* Ambient orbs */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden>
@@ -71,27 +102,37 @@ export default function HomePage() {
 
         <div className="relative max-w-5xl mx-auto px-6 lg:px-12">
           {/* Headline */}
-          <div className="mb-8">
+          <div className="mb-6">
             <h1 className="text-hero">
-              <span
-                className={`block text-[clamp(2rem,5.5vw,5rem)] mb-1 reveal ${textPrimary}`}
+              <div
+                className={`flex items-center justify-center gap-3 text-[clamp(2rem,5.5vw,5rem)] mb-1 reveal ${textPrimary}`}
                 data-delay="60"
               >
-                Empowering Students.
-              </span>
-              <span
-                className="block text-[clamp(2rem,5.5vw,5rem)] gradient-text reveal"
+                <span>Empowering</span>
+
+                <span className="gradient-text">
+                  Students
+                </span>
+              </div>
+
+              <div
+                className={`flex items-center justify-center gap-3 text-[clamp(2rem,5.5vw,5rem)] reveal`}
                 data-delay="140"
-                style={{ paddingBottom: '0.06em' }}
               >
-                Elevating Businesses.
-              </span>
+                <span className={textPrimary}>
+                  Elevating
+                </span>
+
+                <span className="gradient-text">
+                  Businesses
+                </span>
+              </div>
             </h1>
           </div>
 
           {/* Sub */}
           <p
-            className={`max-w-xl mx-auto text-base lg:text-lg leading-relaxed mb-10 reveal ${textMuted}`}
+            className={`max-w-xl mx-auto text-base lg:text-lg leading-relaxed mb-8 reveal ${textMuted}`}
             data-delay="220"
           >
             Practical learning, real-world experiences and digital solutions that create growth.
@@ -103,7 +144,7 @@ export default function HomePage() {
               to="/courses"
               className="group inline-flex items-center gap-2.5 px-7 py-4 rounded-2xl bg-gradient-to-r from-brand-purple to-brand-pink text-white font-semibold text-sm hover:opacity-90 transition-all duration-300 shadow-lg hover:shadow-brand-purple/40 hover:scale-105 active:scale-95"
             >
-              Explore Courses
+              Launch Your Career
               <ArrowRight size={15} className="group-hover:translate-x-1 transition-transform" />
             </NavLink>
             <NavLink
@@ -122,22 +163,70 @@ export default function HomePage() {
       {/* ══════════════════════════════════════════
           COURSES TICKER
       ══════════════════════════════════════════ */}
-      <div className={`py-4 border-y overflow-hidden ${isDark ? 'border-white/6' : 'border-dark-bg/8'}`}>
-        <div className="ticker-track flex items-center gap-8 whitespace-nowrap w-max">
-          {[...courseTicker, ...courseTicker].map((item, i) => (
-            <span key={i} className="flex items-center gap-8">
-              <span className={`text-xs font-semibold tracking-widest uppercase ${textFaint}`}>{item}</span>
-              <span className="w-1 h-1 rounded-full bg-brand-purple/30" />
-            </span>
-          ))}
-        </div>
+      <div
+  className={`py-3 border-y overflow-hidden ${
+    isDark ? 'border-white/6' : 'border-dark-bg/8'
+  }`}
+>
+
+  <div className="ticker-track flex items-center gap-16 whitespace-nowrap w-max">
+
+    {[
+      'Courses',
+
+      'Internships',
+
+      'Webinars',
+
+      'Bootcamps',
+
+      'Services',
+
+      'Courses',
+
+      'Internships',
+
+      'Webinars',
+
+      'Bootcamps',
+
+      'Services',
+    ].map((item, i) => (
+
+      <div key={i} className="flex items-center gap-16">
+
+        <span
+          className={`text-sm font-semibold uppercase tracking-[4px] ${
+            isDark ? 'text-white/60' : 'text-dark-bg/60'
+          }`}
+        >
+
+          {item}
+
+        </span>
+
+        <span className="w-2 h-2 rounded-full bg-brand-purple" />
+
       </div>
+
+    ))}
+
+  </div>
+
+</div>
 
       {/* ══════════════════════════════════════════
           STATS
       ══════════════════════════════════════════ */}
-      <section className="py-20 px-6">
-        <div className="max-w-7xl mx-auto">
+        <section
+className={`py-20 px-6 ${
+isDark
+
+? ''
+
+: 'bg-white'
+}`}
+>        <div className="max-w-7xl mx-auto">
           <div className={`grid grid-cols-2 md:grid-cols-4 divide-x ${isDark ? 'divide-white/8' : 'divide-dark-bg/8'}`}>
             {stats.map((stat, i) => (
               <div key={stat.label} className="px-8 py-6 text-center first:pl-0 last:pr-0 reveal" data-delay={`${i * 80}`}>
@@ -154,8 +243,17 @@ export default function HomePage() {
       {/* ══════════════════════════════════════════
           JOURNEY
       ══════════════════════════════════════════ */}
-      <section className={`py-24 px-6 border-t ${divider}`}>
-        <div className="max-w-7xl mx-auto">
+<section
+className={`py-20 px-6 border-t ${
+divider
+} ${
+isDark
+
+? ''
+
+: 'bg-[#FAFBFD]'
+}`}
+>        <div className="max-w-7xl mx-auto">
           <div className="flex items-center gap-4 mb-16 reveal">
             <div className={`text-xs font-semibold tracking-widest uppercase ${textFaint}`}>01 — Your Journey</div>
             <div className={`flex-1 h-px ${isDark ? 'bg-white/8' : 'bg-dark-bg/8'}`} />
@@ -192,8 +290,17 @@ export default function HomePage() {
       {/* ══════════════════════════════════════════
           WHAT WE OFFER — Courses + Internships + Services overview
       ══════════════════════════════════════════ */}
-      <section className={`py-24 px-6 border-t ${divider}`}>
-        <div className="max-w-7xl mx-auto">
+<section
+className={`py-20 px-6 border-t ${
+divider
+} ${
+isDark
+
+? ''
+
+: 'bg-white'
+}`}
+>        <div className="max-w-7xl mx-auto">
           <div className="flex items-center gap-4 mb-16 reveal">
             <div className={`text-xs font-semibold tracking-widest uppercase ${textFaint}`}>02 — What We Offer</div>
             <div className={`flex-1 h-px ${isDark ? 'bg-white/8' : 'bg-dark-bg/8'}`} />
@@ -206,7 +313,7 @@ export default function HomePage() {
                 isDark ? 'bg-dark-card border-dark-border hover:shadow-brand-purple/10' : 'bg-white border-light-border shadow-sm hover:shadow-brand-purple/10'
               }`}
             >
-              <div className="absolute inset-0 bg-gradient-to-br from-brand-purple/6 to-brand-pink/4 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+              <div className="absolute inset-0 bg-gradient-to-br from-brand-purple/6 to-brand-pink/4 opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
               <div className="relative p-8 flex flex-col h-full">
                 <div className="flex items-center justify-between mb-8">
                   <span className={`text-xs font-semibold tracking-widest uppercase ${textFaint}`}>Courses</span>
@@ -242,7 +349,7 @@ export default function HomePage() {
               }`}
               data-delay="100"
             >
-              <div className="absolute inset-0 bg-gradient-to-br from-brand-pink/6 to-brand-orange/4 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+              <div className="absolute inset-0 bg-gradient-to-br from-brand-pink/6 to-brand-orange/4 opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
               <div className="relative p-8 flex flex-col h-full">
                 <div className="flex items-center justify-between mb-8">
                   <span className={`text-xs font-semibold tracking-widest uppercase ${textFaint}`}>Internships</span>
@@ -254,10 +361,10 @@ export default function HomePage() {
                   Real projects. Real mentors.
                 </h3>
                 <p className={`text-sm leading-relaxed mb-8 ${textMuted}`}>
-                  Training-based and development-based internships from 15 days to 2 months.
+                  Training-based and project-based internships from 15 days to 2 months.
                 </p>
                 <div className="flex flex-wrap gap-2 mb-8">
-                  {['Training Based', 'Development Based', '15 Days – 2 Months'].map(t => (
+                  {['Training Based', 'Project Based', '15 Days – 2 Months'].map(t => (
                     <span key={t} className={`px-3 py-1.5 rounded-full text-xs font-semibold border ${isDark ? 'border-white/10 text-white/55' : 'border-dark-bg/10 text-dark-bg/55'}`}>
                       {t}
                     </span>
@@ -310,72 +417,21 @@ export default function HomePage() {
       </section>
 
       {/* ══════════════════════════════════════════
-          FOUNDERS
-      ══════════════════════════════════════════ */}
-      <section className={`py-24 px-6 border-t ${divider}`}>
-        <div className="max-w-7xl mx-auto">
-          <div className="flex items-center gap-4 mb-16 reveal">
-            <div className={`text-xs font-semibold tracking-widest uppercase ${textFaint}`}>03 — Founders</div>
-            <div className={`flex-1 h-px ${isDark ? 'bg-white/8' : 'bg-dark-bg/8'}`} />
-          </div>
-
-          <div className="grid lg:grid-cols-2 gap-5">
-            {[
-              {
-                name: 'Akshaya Hemraj',
-                role: 'Founder',
-                quote: 'We built NextStep to close the gap between learning and doing — creating a space where growth is inevitable.',
-                gradient: 'from-brand-purple to-brand-pink',
-              },
-              {
-                name: 'Ganga A',
-                role: 'Co-Founder',
-                quote: 'Our mission is simple: make quality education accessible and help businesses build a digital presence that actually converts.',
-                gradient: 'from-brand-pink to-brand-orange',
-              },
-            ].map((founder, i) => (
-              <div
-                key={founder.name}
-                className={`group relative rounded-3xl border overflow-hidden transition-all duration-500 hover:-translate-y-1 hover:shadow-2xl reveal ${
-                  isDark ? 'bg-dark-card border-dark-border hover:shadow-brand-purple/8' : 'bg-white border-light-border shadow-sm hover:shadow-brand-purple/8'
-                }`}
-                data-delay={`${i * 120}`}
-              >
-                <div className={`h-1.5 bg-gradient-to-r ${founder.gradient}`} />
-                <div className="p-8 lg:p-10">
-                  <div className={`inline-flex px-3 py-1 rounded-full text-[11px] font-bold tracking-widest uppercase bg-gradient-to-r ${founder.gradient} text-white mb-6`}>
-                    {founder.role}
-                  </div>
-                  <h3 className={`text-4xl lg:text-5xl font-display font-black leading-none mb-1 ${textPrimary}`}>
-                    {founder.name}
-                  </h3>
-                  <div className={`w-12 h-0.5 bg-gradient-to-r ${founder.gradient} my-6`} />
-                  <p className={`text-base leading-[1.8] italic ${textMuted}`}>
-                    "{founder.quote}"
-                  </p>
-                </div>
-                <div className="absolute top-8 right-8 opacity-10">
-                  <Sparkles size={28} className={isDark ? 'text-white' : 'text-dark-bg'} />
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <div className="mt-6 text-center reveal" data-delay="200">
-            <NavLink to="/about" className={`inline-flex items-center gap-2 text-sm ${textMuted} hover:text-brand-purple transition-colors`}>
-              Learn more about us <ArrowRight size={14} />
-            </NavLink>
-          </div>
-        </div>
-      </section>
-
-      {/* ══════════════════════════════════════════
           COMMUNITY
       ══════════════════════════════════════════ */}
-      <section className={`py-24 px-6 border-t ${divider}`}>
-        <div className="max-w-7xl mx-auto">
+<section
+className={`py-20 px-6 border-t ${
+divider
+} ${
+isDark
+
+? ''
+
+: 'bg-[#FAFBFD]'
+}`}
+>        <div className="max-w-7xl mx-auto">
           <div className="flex items-center gap-4 mb-14 reveal">
-            <div className={`text-xs font-semibold tracking-widest uppercase ${textFaint}`}>04 — Community</div>
+            <div className={`text-xs font-semibold tracking-widest uppercase ${textFaint}`}>03 — Community</div>
             <div className={`flex-1 h-px ${isDark ? 'bg-white/8' : 'bg-dark-bg/8'}`} />
           </div>
 
@@ -438,8 +494,8 @@ export default function HomePage() {
                 </p>
               </div>
               <div className="flex flex-col sm:flex-row gap-3 flex-shrink-0">
-                <NavLink to="/courses" className="px-7 py-3.5 bg-white text-brand-purple font-bold text-sm rounded-xl hover:bg-white/90 transition-all hover:scale-105 shadow-xl">
-                  Explore Courses
+                <NavLink to="/internships" className="px-7 py-3.5 bg-white text-brand-purple font-bold text-sm rounded-xl hover:bg-white/90 transition-all hover:scale-105 shadow-xl">
+                  Launch Your Career
                 </NavLink>
                 <NavLink to="/contact" className="px-7 py-3.5 bg-white/15 border border-white/25 text-white font-semibold text-sm rounded-xl hover:bg-white/25 transition-all hover:scale-105">
                   Contact Us

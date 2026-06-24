@@ -8,7 +8,7 @@ const contactLinks = [
     icon: Mail,
     label: 'Email',
     value: 'queries.nextsteplearning@gmail.com',
-    href: 'mailto:queries.nextsteplearning@gmail.com',
+    href: 'https://mail.google.com/mail/?view=cm&fs=1&to=queries.nextsteplearning@gmail.com',
     gradient: 'from-brand-purple to-brand-pink',
     desc: 'For courses, services and general inquiries',
   },
@@ -23,7 +23,7 @@ const contactLinks = [
   {
     icon: Linkedin,
     label: 'LinkedIn',
-    value: 'NextStep Learning Official',
+    value: 'NextStep Learning',
     href: 'https://www.linkedin.com/company/nextstep-learning-official/',
     gradient: 'from-blue-500 to-brand-purple',
     desc: 'Connect with us professionally',
@@ -63,8 +63,12 @@ export default function ContactPage() {
   const isDark = theme === 'dark';
   useReveal();
 
-  const [form, setForm] = useState({ name: '', email: '', message: '' });
-  const [loading, setLoading] = useState(false);
+const [form, setForm] = useState({
+  name: '',
+  email: '',
+  phone: '',
+  message: '',
+});  const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState('');
 
@@ -81,13 +85,15 @@ export default function ContactPage() {
       const { error: dbError } = await supabase.from('contact_messages').insert({
         name: form.name,
         email: form.email,
+        phone: form.phone,
         message: form.message,
         created_at: new Date().toISOString(),
       });
       if (dbError) throw dbError;
       setSuccess(true);
-      setForm({ name: '', email: '', message: '' });
-    } catch {
+      setForm({ name: '', email: '',phone:'', message: ''});
+    } catch (err) {
+      console.log(err);
       setError('Something went wrong. Please try emailing us directly.');
     } finally {
       setLoading(false);
@@ -95,7 +101,7 @@ export default function ContactPage() {
   };
 
   return (
-    <div className={`min-h-screen pt-64 pb-24 ${isDark ? 'bg-dark-bg' : 'bg-light-bg'}`}>
+    <div className={`min-h-screen pt-32 pb-24 ${isDark ? 'bg-dark-bg' : 'bg-light-bg'}`}>
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
 
         {/* ── Header ── */}
@@ -103,9 +109,9 @@ export default function ContactPage() {
           <div className={`text-xs font-semibold tracking-widest uppercase mb-4 ${textFaint}`}>
             NextStep Learning — Contact
           </div>
-          <h1 className={`text-[clamp(2.5rem,7vw,6rem)] font-display font-black leading-none mb-4 ${textPrimary}`}>
+          <h1 className={`text-[clamp(2.3rem,5vw,4.8rem)] font-display font-black leading-none mb-4 ${textPrimary}`}>
             Let's<br />
-            <span className="gradient-text">Connect.</span>
+            <span className="gradient-text">Connect</span>
           </h1>
           <p className={`max-w-md text-base lg:text-lg leading-relaxed ${textMuted}`}>
             Have a question, project or just want to say hello? We're always open.
@@ -207,6 +213,57 @@ export default function ContactPage() {
                     />
                   </div>
                 </div>
+
+<div>
+
+<label className={`block text-xs font-semibold mb-1.5 ${textMuted}`}>
+
+Phone Number
+
+<span className="text-brand-pink">*</span>
+
+</label>
+
+<input
+
+type="tel"
+
+required
+
+placeholder="+91 XXXXX XXXXX"
+
+maxLength={10}
+
+pattern="[0-9]{10}"
+
+inputMode="numeric"
+
+value={form.phone}
+
+onChange={(e)=>
+
+setForm(f => ({
+
+...f,
+
+phone: e.target.value.replace(/\D/g,'')
+
+}))
+
+}
+
+className={`w-full px-4 py-3 rounded-xl border text-sm outline-none transition-all focus:border-brand-purple focus:ring-2 focus:ring-brand-purple/15 ${
+isDark
+
+? 'bg-dark-bg border-dark-border text-white placeholder-white/25'
+
+: 'bg-light-muted border-light-border text-dark-bg placeholder-dark-bg/25'
+
+}`}
+
+/>
+
+</div>
 
                 <div>
                   <label className={`block text-xs font-semibold mb-1.5 ${textMuted}`}>

@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { Heart, Lightbulb, Globe, Users, BookOpen, Sparkles, ArrowUpRight } from 'lucide-react';
 import { NavLink } from 'react-router-dom';
 import { useTheme } from '../context/ThemeContext';
+import { Linkedin } from 'lucide-react';
 
 const values = [
   { icon: Sparkles, label: 'Growth', desc: 'Every person has unlimited potential waiting to be unlocked.' },
@@ -41,24 +42,59 @@ export default function AboutPage() {
   const textMuted = isDark ? 'text-white/50' : 'text-dark-bg/50';
   const textFaint = isDark ? 'text-white/25' : 'text-dark-bg/25';
   const divider = isDark ? 'border-white/8' : 'border-dark-bg/8';
+  const stats = [
 
+{
+
+value:'1000+',
+
+label:'Students',
+
+},
+
+{
+
+value:'8+',
+
+label:'Domains',
+
+},
+
+{
+
+value:'2026',
+
+label:'Founded',
+
+},
+
+{
+
+value:'100%',
+
+label:'Practical Learning',
+
+},
+
+];
   return (
-    <div className={`min-h-screen pt-64 pb-24 ${isDark ? 'bg-dark-bg' : 'bg-light-bg'}`}>
+    <div className={`min-h-screen pt-32 pb-24 ${isDark ? 'bg-dark-bg' : 'bg-light-bg'}`}>
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
 
         {/* ── Header ── */}
-        <div className="mb-20 reveal">
+        <div className="mb-14 reveal">
           <div className={`text-xs font-semibold tracking-widest uppercase mb-4 ${textFaint}`}>
             NextStep Learning — Our Story
           </div>
-          <h1 className={`text-[clamp(2.5rem,7vw,6rem)] font-display font-black leading-none mb-4 ${textPrimary}`}>
+          
+          <h1 className={`text-[clamp(2.3rem,5vw,4.8rem)] font-display font-black leading-none mb-4 ${textPrimary}`}>
             Built with<br />
-            <span className="gradient-text">purpose.</span>
+            <span className="gradient-text">Purpose</span>
           </h1>
         </div>
 
         {/* ── Story — two column editorial ── */}
-        <div className={`grid lg:grid-cols-2 gap-12 lg:gap-20 pb-20 border-b ${divider}`}>
+        <div className={`grid lg:grid-cols-2 gap-10 lg:gap-14 pb-14 border-b ${divider}`}>
           <div className="reveal-left">
             <h2 className={`text-2xl font-display font-black mb-6 ${textPrimary}`}>Our Story</h2>
             <p className={`text-base lg:text-lg leading-[1.9] mb-5 ${textMuted}`}>
@@ -79,15 +115,92 @@ export default function AboutPage() {
                   "To empower students with practical skills and help businesses establish a strong digital presence."
                 </p>
                 <div className="w-10 h-0.5 bg-gradient-to-r from-brand-purple to-brand-pink" />
+                <div className="mt-8">
+
+                <div className={`text-xs font-semibold tracking-widest uppercase mb-4 ${textFaint}`}>
+                Our Vision
+                </div>
+
+                <p className={`text-lg leading-relaxed ${textMuted}`}>
+
+                To create a connected ecosystem where students, professionals and businesses grow together through practical learning and digital transformation.
+
+                </p>
+
+                </div>
               </div>
             </div>
           </div>
         </div>
 
+{/* Statistics */}
+
+<div className={`py-14 border-b ${divider}`}>
+
+<div className="flex items-center gap-4 mb-10 reveal">
+
+<div
+className={`text-2xl font-display font-black ${textPrimary}`}
+>
+
+At a Glance
+
+</div>
+
+<div
+className={`flex-1 h-px ${
+isDark ? 'bg-white/8' : 'bg-dark-bg/8'
+}`}
+/>
+
+</div>
+
+<div className="grid grid-cols-2 lg:grid-cols-4 gap-5">
+
+{stats.map((stat,i)=>(
+
+<div
+
+key={stat.label}
+
+data-delay={`${i*80}`}
+
+className={`p-8 rounded-2xl border text-center reveal ${
+isDark
+
+? 'border-white/8 hover:border-brand-purple/25'
+
+: 'border-dark-bg/8 hover:border-brand-purple/25 bg-white shadow-sm'
+}`}
+
+>
+
+<div className="gradient-text text-4xl font-display font-black mb-2">
+
+{stat.value}
+
+</div>
+
+<div className={`text-sm font-semibold ${textMuted}`}>
+
+{stat.label}
+
+</div>
+
+</div>
+
+))}
+
+</div>
+
+</div>
+
+{/* ── Founders — editorial layout ── */}
+        
         {/* ── Founders — editorial layout ── */}
-        <div className={`py-20 border-b ${divider}`}>
-          <div className="flex items-center gap-4 mb-14 reveal">
-            <div className={`text-xs font-semibold tracking-widest uppercase ${textFaint}`}>The Founders</div>
+        <div className={`py-14 border-b ${divider}`}>
+          <div className="flex items-center gap-4 mb-10 reveal">
+            <div className={`text-2xl font-display font-black ${textPrimary}`}>The Founders</div>
             <div className={`flex-1 h-px ${isDark ? 'bg-white/8' : 'bg-dark-bg/8'}`} />
           </div>
 
@@ -96,6 +209,7 @@ export default function AboutPage() {
               {
                 name: 'Akshaya Hemraj',
                 role: 'Founder',
+                linkedin:'http://www.linkedin.com/in/akshaya-hemraj',
                 gradient: 'from-brand-purple to-brand-pink',
                 quote: 'We built NextStep to close the gap between learning and doing — creating a space where growth is inevitable.',
                 detail: 'Visionary leader with a passion for democratizing quality education and building purposeful digital products that serve both students and businesses.',
@@ -103,6 +217,7 @@ export default function AboutPage() {
               {
                 name: 'Ganga A',
                 role: 'Co-Founder',
+                linkedin:'https://www.linkedin.com/in/ganga-a-aab55a3a8/',
                 gradient: 'from-brand-pink to-brand-orange',
                 quote: 'Our mission is simple: make quality education accessible and help businesses build digital presence that actually converts.',
                 detail: 'Strategic thinker and operations expert committed to creating impact at scale through innovation, community building and purposeful design.',
@@ -125,7 +240,7 @@ export default function AboutPage() {
                   </div>
 
                   {/* Name — large editorial */}
-                  <h3 className={`text-5xl lg:text-6xl font-display font-black leading-none mb-1 ${textPrimary}`}>
+                  <h3 className={`text-5xl lg:text-6xl font-semibold leading-tight tracking-tight mb-1 ${textPrimary}`}>
                     {founder.name}
                   </h3>
 
@@ -137,9 +252,35 @@ export default function AboutPage() {
                   </p>
 
                   {/* Detail */}
-                  <p className={`text-sm leading-relaxed ${isDark ? 'text-white/35' : 'text-dark-bg/35'}`}>
-                    {founder.detail}
-                  </p>
+                  {/* Detail */}
+
+<p
+className={`text-sm leading-relaxed ${
+isDark ? 'text-white/35' : 'text-dark-bg/35'
+}`}
+>
+
+{founder.detail}
+
+</p>
+
+<a
+
+href={founder.linkedin}
+
+target="_blank"
+
+rel="noopener noreferrer"
+
+className="mt-5 inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-brand-purple/20 text-brand-purple text-sm font-semibold hover:bg-brand-purple/10 transition-all"
+
+>
+
+<Linkedin size={15} />
+
+Connect on LinkedIn
+
+</a>
                 </div>
 
                 {/* Decorative corner */}
@@ -152,9 +293,9 @@ export default function AboutPage() {
         </div>
 
         {/* ── Values — mixed grid ── */}
-        <div className="py-20">
-          <div className="flex items-center gap-4 mb-14 reveal">
-            <div className={`text-xs font-semibold tracking-widest uppercase ${textFaint}`}>Our Values</div>
+        <div className="py-14">
+          <div className="flex items-center gap-4 mb-10 reveal">
+            <div className={`text-2xl font-display font-black ${textPrimary}`}>Our Values</div>
             <div className={`flex-1 h-px ${isDark ? 'bg-white/8' : 'bg-dark-bg/8'}`} />
           </div>
 
@@ -190,8 +331,8 @@ export default function AboutPage() {
             <p className={`text-sm ${textMuted}`}>Start your journey or bring your business to the next level.</p>
           </div>
           <div className="flex gap-3">
-            <NavLink to="/courses" className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-bold text-white bg-gradient-to-r from-brand-purple to-brand-pink hover:opacity-90 transition-all hover:scale-105">
-              Explore Courses
+            <NavLink to="/internships" className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-bold text-white bg-gradient-to-r from-brand-purple to-brand-pink hover:opacity-90 transition-all hover:scale-105">
+              Launch Your Career
             </NavLink>
             <NavLink to="/contact" className={`inline-flex items-center gap-1.5 px-5 py-2.5 rounded-xl text-sm font-semibold transition-all hover:scale-105 border ${isDark ? 'border-white/15 text-white/70 hover:border-white/30 hover:text-white' : 'border-dark-bg/15 text-dark-bg/70 hover:border-dark-bg/30'}`}>
               Contact Us <ArrowUpRight size={13} />

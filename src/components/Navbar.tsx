@@ -5,6 +5,7 @@ import { useTheme } from '../context/ThemeContext';
 
 const navItems = [
   { label: 'Home', to: '/' },
+  { label: 'Events', to: '/events' },
   { label: 'Courses', to: '/courses' },
   { label: 'Internships', to: '/internships' },
   { label: 'Services', to: '/services' },
@@ -41,16 +42,16 @@ export default function Navbar() {
       <nav
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-out ${
           scrolled
-            ? `mx-4 mt-3 rounded-2xl border shadow-2xl ${
+            ? `mx-6 mt-2 rounded-xl border shadow-2xl ${
                 isDark
-                  ? 'glass border-white/8 shadow-black/40'
+                  ? 'glass border-white/10 bg-black/50 shadow-black/40'
                   : 'glass-light border-dark-bg/8 shadow-dark-bg/10'
               }`
             : 'mx-0 mt-0'
         }`}
       >
-        <div className={`max-w-7xl mx-auto flex items-center justify-between transition-all duration-500 ${
-          scrolled ? 'px-5 py-3' : 'px-6 lg:px-12 py-5'
+        <div className={`max-w-[1400px] mx-auto flex items-center justify-between transition-all duration-500 ${
+          scrolled ? 'px-3 py-1' : 'px-6 lg:px-10 py-2'
         }`}>
 
           {/* Logo */}
@@ -58,7 +59,7 @@ export default function Navbar() {
             <img
               src="/Side_transperent.png"
               alt="NextStep Learning"
-              className={`w-auto object-contain transition-all duration-500 ${scrolled ? 'h-40' : 'h-48'}`}
+              className={`w-auto object-contain transition-all duration-500 ${scrolled ? 'h-12' : 'h-16'}`}
             />
           </NavLink>
 
@@ -70,11 +71,11 @@ export default function Navbar() {
                 to={item.to}
                 end={item.to === '/'}
                 className={({ isActive }) =>
-                  `relative px-4 py-2 text-[13px] font-medium rounded-xl transition-all duration-200 select-none ${
+                  `relative px-4 py-2 text-[15px] font-semibold rounded-xl transition-all duration-200 select-none ${
                     isActive
                       ? 'text-brand-purple'
                       : isDark
-                        ? 'text-white/55 hover:text-white/90'
+                        ? 'text-white/85 hover:text-white'
                         : 'text-dark-bg/55 hover:text-dark-bg/90'
                   }`
                 }
@@ -106,7 +107,7 @@ export default function Navbar() {
             </button>
 
             <NavLink
-              to="/courses"
+              to="/internships"
               className="inline-flex items-center px-5 py-2 text-[13px] font-semibold text-white rounded-xl bg-gradient-to-r from-brand-purple to-brand-pink hover:opacity-90 transition-all duration-200 shadow-md hover:shadow-brand-purple/30 hover:scale-105 active:scale-95"
             >
               Get Started
@@ -114,7 +115,7 @@ export default function Navbar() {
           </div>
 
           {/* Mobile controls */}
-          <div className="lg:hidden flex items-center gap-1.5">
+          <div className="lg:hidden flex items-center gap-1">
             <button
               onClick={toggleTheme}
               className={`p-2 rounded-lg ${isDark ? 'text-white/50' : 'text-dark-bg/50'}`}
@@ -173,7 +174,7 @@ export default function Navbar() {
 
           <div className={`pt-3 border-t ${isDark ? 'border-white/8' : 'border-dark-bg/8'}`}>
             <NavLink
-              to="/courses"
+              to="/internships"
               className="block px-4 py-3 text-sm font-bold text-white text-center rounded-xl bg-gradient-to-r from-brand-purple to-brand-pink hover:opacity-90 transition-opacity"
             >
               Get Started

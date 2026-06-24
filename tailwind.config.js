@@ -25,7 +25,8 @@ export default {
       },
       fontFamily: {
         sans: ['Inter', 'sans-serif'],
-        display: ['Syne', 'sans-serif'],
+        display: ['Outfit', 'sans-serif'],
+        hero: ['Syne', 'sans-serif'],
       },
       borderColor: {
         DEFAULT: 'rgba(255,255,255,0.08)',
